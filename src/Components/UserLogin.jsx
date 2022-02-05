@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Container,
   Paper,
@@ -6,34 +7,53 @@ import {
   Box,
   TextField,
   Button,
+  Alert,
+  Snackbar,
 } from "@mui/material/";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
 const UserLogin = () => {
+  // Estados iniciales de los campos
   const [emailUser, setEmailUser] = useState("");
   const [passwordUser, setPasswordUser] = useState("");
+  const [openAlertRed, setOpenAlertRed] = useState(false);
+
+  //Evento para el boton de Sign Up - valida campos llenos, guarda en localStorage y activa alerta segun caso
 
   const buttonSubmit = (e) => {
     e.preventDefault();
-    console.log("enviado");
-    const valueLocal = window.localStorage.getItem("emailUser");
-    console.log(valueLocal);
-    if (valueLocal === emailUser) {
-      console.log("Puedes Ingresar");
+    const valueLocal = window.localStorage.getItem("setEmailUser");
+    if (!valueLocal) {
+      handleClickRed();
+    } else if (valueLocal === emailUser) {
+      console.log("registrado");
     } else {
-      console.log("upss no estas registrado");
+      handleClickRed();
     }
   };
 
+  // tomando el valor del input email y cambiando el estado
   const valueinputEmail = (e) => {
     setEmailUser(e.target.value);
-    console.log("cambiando estado", emailUser);
-  };
-  const valueinputPassword = (e) => {
-    setPasswordUser(e.target.value);
-    console.log("cambiando estado", passwordUser);
   };
 
+  // tomando el valor del input password y cambiando el estado
+  const valueinputPassword = (e) => {
+    setPasswordUser(e.target.value);
+  };
+
+  // cambiando el estado de la alert para abrirla
+  const handleClickRed = () => {
+    setOpenAlertRed(true);
+  };
+
+  // cambiando el estado de la alert para cerrarla
+  const handleCloseRed = (reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenAlertRed(false);
+  };
   return (
     <Container>
       <Paper
@@ -102,6 +122,19 @@ const UserLogin = () => {
           >
             Sing In
           </Button>
+          <Snackbar
+            open={openAlertRed}
+            autoHideDuration={4000}
+            onClose={handleCloseRed}
+          >
+            <Alert
+              onClose={handleCloseRed}
+              severity="error"
+              sx={{ width: "100%" }}
+            >
+              Por favor, llena los campos o verifica tu cuenta.
+            </Alert>
+          </Snackbar>
           <Typography
             variant="p"
             gutterBottom
@@ -110,6 +143,8 @@ const UserLogin = () => {
               marginBottom: 5,
               fontSize: "18px",
             }}
+            component={Link}
+            to={"user-register"}
           >
             ¿No tienes una Cuenta? Regístrate
           </Typography>
