@@ -169,7 +169,7 @@ const UserRegister = () => {
               fontSize: "18px",
             }}
             component={Link}
-            to={"/"}
+            to={"user-login"}
           >
             ¿Ya tienes una Cuenta?
           </Typography>

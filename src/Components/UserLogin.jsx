@@ -144,7 +144,7 @@ const UserLogin = () => {
               fontSize: "18px",
             }}
             component={Link}
-            to={"user-register"}
+            to={"/"}
           >
             ¿No tienes una Cuenta? Regístrate
           </Typography>
