@@ -1,11 +1,16 @@
 import React from "react";
 import { Container, Typography, Box } from "@mui/material/";
-import GitHubIcon from "@mui/icons-material/GitHub";
 import ListRepositories from "./ListRepositories.jsx";
+import HeaderNavegation from "./HeaderNavegation.jsx";
 
 const ViewRepositories = () => {
   return (
-    <Container>
+    <Container
+      sx={{
+        marginBottom: 10,
+      }}
+    >
+      <HeaderNavegation />
       <Box
         sx={{
           display: "flex",
@@ -15,14 +20,13 @@ const ViewRepositories = () => {
         }}
       >
         <Typography
-          variant="h2"
+          variant="h3"
           gutterBottom
           sx={{
             marginTop: 10,
           }}
         >
           Tus Repositorios
-          <GitHubIcon sx={{ width: 70, height: 70, marginLeft: 10 }} />
         </Typography>
       </Box>
       <ListRepositories />
