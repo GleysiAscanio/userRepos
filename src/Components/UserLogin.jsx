@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Container,
   Paper,
@@ -14,19 +14,25 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 
 const UserLogin = () => {
   // Estados iniciales de los campos
-  const [emailUser, setEmailUser] = useState("");
+  const [userName, setUserName] = useState("");
   const [passwordUser, setPasswordUser] = useState("");
   const [openAlertRed, setOpenAlertRed] = useState(false);
+  const navigate = useNavigate();
 
   //Evento para el boton de Sign Up - valida campos llenos, guarda en localStorage y activa alerta segun caso
 
   const buttonSubmit = (e) => {
     e.preventDefault();
-    const valueLocal = window.localStorage.getItem("setEmailUser");
-    if (!valueLocal) {
+    const valueLocalUser = window.localStorage.getItem("setUserName");
+    const valueLocalToken = window.localStorage.getItem("setPasswordUser");
+
+    if (!valueLocalUser && !valueLocalToken) {
       handleClickRed();
-    } else if (valueLocal === emailUser) {
-      console.log("registrado");
+    } else if (
+      valueLocalUser === userName &&
+      valueLocalToken === passwordUser
+    ) {
+      navigate("/view-repositories");
     } else {
       handleClickRed();
     }
@@ -34,7 +40,7 @@ const UserLogin = () => {
 
   // tomando el valor del input email y cambiando el estado
   const valueinputEmail = (e) => {
-    setEmailUser(e.target.value);
+    setUserName(e.target.value);
   };
 
   // tomando el valor del input password y cambiando el estado
@@ -96,14 +102,14 @@ const UserLogin = () => {
             required
             id="userInput"
             label="Usuario GitHub"
-            value={emailUser}
+            value={userName}
             sx={{ width: "400px" }}
             onChange={valueinputEmail}
           />
           <TextField
             required
             id="passwordInput"
-            label="Password"
+            label="Token Github"
             value={passwordUser}
             type="password"
             autoComplete="current-password"
