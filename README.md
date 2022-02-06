@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+# User Repos
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+En este proyecto queremos mostrar una aplicación web, capaz de visualizar y manipular data de un usuario con cuenta y token válidos en GitHub, para realizar diversas funciones.
 
-## Available Scripts
+## Definición de producto
 
-In the project directory, you can run:
+Esta aplicación web va dirigida a usuarios con cuenta y token válidos en GitHub, dado que esta diseñada para realizar consultas de sus repositorios, en ella podrá visualizar información de hasta los últimos 10 repositorios realizados:
 
-### `npm start`
+* Nombre.
+* Descripción. 
+* Favoritos.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Historias de usuario
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### H.U 1
+"Como usuario quiero poder registrarme en la aplicación web."
 
-### `npm test`
+#### Definición de terminado
+*Crear una aplicación de una sola página donde un usuario pueda registrarse.
+*Crear un campo para registrar el nombre de su usuario en Github.
+*Crear un campo para registrar el token generado en Github.
+*Guardar al usuario en un almacenamiento local.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### H.U 2
+"Como usuario, quiero poder iniciar sesión después de registrarme en la aplicación"
 
-### `npm run build`
+#### Definición de terminado
+*Crear un campo para ingresar el nombre de su usuario en Github.
+*Crear un campo para ingresar el token generado en Github.
+*En el inicio de sesión se valida las credenciales contra el almacenamiento local.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### H.U 3
+"Como usuario, quiero enumerar todos los repositorios en mi usuario de Github".
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Definición de terminado
+*Una vez que hayan iniciado sesión, tienen una sección donde se enumeran sus últimos 10 repositorios.
+*Se visualiza el nombre y la Descripción del repositorio. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### H.U 4
+"Como usuario, quiero buscar en todos mis repositorios y crear una lista de mis repositorios favoritos".
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Definición de terminado
+*Una vez que hayan iniciado sesión, tienen una sección donde se enumeran sus repositorios favoritos.
+*Se visualiza el nombre del repositorio.
