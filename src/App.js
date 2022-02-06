@@ -8,7 +8,7 @@ import ViewRepositories from "./Components/ViewRepositories.jsx";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter basename="/userRepos/">
         <Routes>
           <Route path="/" element={<UserRegister />} />
           <Route path="user-login" element={<UserLogin />} />
