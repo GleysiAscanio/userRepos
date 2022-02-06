@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { bodySearch, headers } from "./tokens.jsx";
+import IconStart from "@mui/icons-material/StarOutline";
 import {
   TableContainer,
   Paper,
@@ -9,32 +11,33 @@ import {
   TableBody,
 } from "@mui/material/";
 
-const valueLocalUser = window.localStorage.getItem("setUserName");
-const valueLocalToken = window.localStorage.getItem("setPasswordUser");
-
-console.log(valueLocalUser, valueLocalToken);
-
-const bodySearch = {
-  query: `
-              query { 
-                  user(login: "${valueLocalUser}"){
-                    repositories(last:10, orderBy: {field: CREATED_AT, direction:ASC}){
-                      nodes{
-                        id,
-                        name,
-                        description,
-                      }
-                    }
-                  }
-                }`,
-};
-const headers = {
-  "Content-Type": "application/json",
-  Authorization: "bearer " + valueLocalToken,
-};
-
 const ListRepositories = () => {
   const [info, setInfo] = useState([]);
+
+  const dataReposFavorites = window.localStorage.getItem("setFavorite");
+  let parsedReposFavorites;
+
+  if (!dataReposFavorites) {
+    window.localStorage.setItem("setFavorite", JSON.stringify([]));
+    parsedReposFavorites = [];
+  } else {
+    parsedReposFavorites = JSON.parse(dataReposFavorites);
+  }
+
+  const saveFavorites = (newFavorite) => {
+    const transformingFavorites = JSON.stringify(newFavorite);
+    window.localStorage.setItem("setFavorite", transformingFavorites);
+    setStarFavorite(newFavorite);
+  };
+
+  const handleFavorite = (e, id) => {
+    e.preventDefault();
+    const newFavorite = [...starFavorite];
+    newFavorite.push(id);
+    saveFavorites(newFavorite);
+  };
+
+  const [starFavorite, setStarFavorite] = useState(parsedReposFavorites);
 
   useEffect(() => {
     const getData = async () => {
@@ -61,13 +64,19 @@ const ListRepositories = () => {
           <TableRow>
             <TableCell
               align="center"
-              sx={{ fontSize: "26px", fontWeight: "600" }}
+              sx={{ fontSize: "24px", fontWeight: "600" }}
+            >
+              Marcar Favorito
+            </TableCell>
+            <TableCell
+              align="center"
+              sx={{ fontSize: "24px", fontWeight: "600" }}
             >
               Repositorio
             </TableCell>
             <TableCell
               align="center"
-              sx={{ fontSize: "26px", fontWeight: "600" }}
+              sx={{ fontSize: "24px", fontWeight: "600" }}
             >
               Descripción
             </TableCell>
@@ -79,6 +88,13 @@ const ListRepositories = () => {
               key={dato.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
+              <TableCell align="center">
+                <IconStart
+                  sx={{ width: 40, height: 40 }}
+                  id={dato.id}
+                  onClick={(e) => handleFavorite(e, dato.id)}
+                />
+              </TableCell>
               <TableCell align="center" sx={{ fontSize: "20px" }}>
                 {dato.name}
               </TableCell>
