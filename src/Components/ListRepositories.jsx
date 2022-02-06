@@ -8,12 +8,16 @@ import {
   TableCell,
   TableBody,
 } from "@mui/material/";
-import dataGithub from "../tokens.jsx";
+
+const valueLocalUser = window.localStorage.getItem("setUserName");
+const valueLocalToken = window.localStorage.getItem("setPasswordUser");
+
+console.log(valueLocalUser, valueLocalToken);
 
 const bodySearch = {
   query: `
               query { 
-                  user(login: "${dataGithub.username}"){
+                  user(login: "${valueLocalUser}"){
                     repositories(last:10, orderBy: {field: CREATED_AT, direction:ASC}){
                       nodes{
                         id,
@@ -26,7 +30,7 @@ const bodySearch = {
 };
 const headers = {
   "Content-Type": "application/json",
-  Authorization: "bearer " + dataGithub.token,
+  Authorization: "bearer " + valueLocalToken,
 };
 
 const ListRepositories = () => {

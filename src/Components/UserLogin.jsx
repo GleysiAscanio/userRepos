@@ -32,7 +32,7 @@ const UserLogin = () => {
       valueLocalUser === userName &&
       valueLocalToken === passwordUser
     ) {
-      navigate("/view-repositories");
+      navigate("/welcome-user");
     } else {
       handleClickRed();
     }
